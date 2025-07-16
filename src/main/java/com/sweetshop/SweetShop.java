@@ -93,5 +93,15 @@ public class SweetShop {
         return sorted;
     }
 
+    /**
+     * Returns a list of sweets sorted by quantity.
+     * @return sorted list
+     */
+    public List<Sweet> sortSweetsByQuantity() {
+        List<Sweet> sorted = new ArrayList<>(sweets);
+        sorted.sort(Comparator.comparingInt(Sweet::getQuantity));
+        return sorted;
+    }
+
 
 }
