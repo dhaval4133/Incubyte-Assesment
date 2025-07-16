@@ -22,6 +22,13 @@ public class SweetShop {
     public void addSweet(Sweet sweet) {
         this.sweets.add(sweet);
     }
+    /**
+     * Returns a list of all sweets in the shop.
+     * @return list of sweets
+     */
+    public List<Sweet> getAllSweets() {
+        return new ArrayList<>(sweets);
+    }
 
 
 }
