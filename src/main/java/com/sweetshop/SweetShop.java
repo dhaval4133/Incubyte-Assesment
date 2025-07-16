@@ -1,4 +1,5 @@
 package com.sweetshop;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -80,6 +81,16 @@ public class SweetShop {
             }
         }
         return result;
+    }
+
+    /**
+     * Returns a list of sweets sorted by name.
+     * @return sorted list
+     */
+    public List<Sweet> sortSweetsByName() {
+        List<Sweet> sorted = new ArrayList<>(sweets);
+        sorted.sort(Comparator.comparing(Sweet::getName));
+        return sorted;
     }
 
 
