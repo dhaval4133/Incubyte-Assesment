@@ -1,0 +1,9 @@
+package com.sweetshop;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.List;
+
+public class SweetShopTest {
+
+}
