@@ -36,6 +36,20 @@ public class SweetShop {
     public void deleteSweet(int id) {
         sweets.removeIf(sweet -> sweet.getId() == id);
     }
+    /**
+     * Searches for sweets by name (case-insensitive).
+     * @param name the name to search
+     * @return list of matching sweets
+     */
+    public List<Sweet> searchSweetsByName(String name) {
+        List<Sweet> result = new ArrayList<>();
+        for (Sweet sweet : sweets) {
+            if (sweet.getName().equalsIgnoreCase(name)) {
+                result.add(sweet);
+            }
+        }
+        return result;
+    }
 
 
 }
