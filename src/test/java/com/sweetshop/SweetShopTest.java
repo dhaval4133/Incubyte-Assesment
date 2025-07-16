@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 public class SweetShopTest {
+    //Test Case to Add Sweet.
     @Test
     public void testAddSweet() {
         SweetShop shop = new SweetShop();
@@ -13,6 +14,8 @@ public class SweetShopTest {
         assertEquals(1, shop.getAllSweets().size());
         assertEquals("Kaju Katli", shop.getAllSweets().get(0).getName());
     }
+
+    //Test Case for View All Sweets.
     @Test
     public void testViewAllSweets() {
         SweetShop shop = new SweetShop();
@@ -23,6 +26,20 @@ public class SweetShopTest {
         assertEquals(2, shop.getAllSweets().size());
         assertTrue(shop.getAllSweets().contains(sweet1));
         assertTrue(shop.getAllSweets().contains(sweet2));
+    }
+
+    //Test Case for the Delete Sweet.
+    @Test
+    public void testDeleteSweet() {
+        SweetShop shop = new SweetShop();
+        Sweet sweet1 = new Sweet(1001, "Kaju Katli", "Nut-Based", 50, 20);
+        Sweet sweet2 = new Sweet(1002, "Gajar Halwa", "Vegetable-Based", 30, 15);
+        shop.addSweet(sweet1);
+        shop.addSweet(sweet2);
+        assertEquals(2, shop.getAllSweets().size());
+        shop.deleteSweet(1001);
+        assertEquals(1, shop.getAllSweets().size());
+        assertEquals("Gajar Halwa", shop.getAllSweets().get(0).getName());
     }
 
 }
