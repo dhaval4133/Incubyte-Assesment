@@ -67,4 +67,17 @@ public class SweetShopTest {
         assertEquals(0, shop.searchSweetsByCategory("Fruit-Based").size());
     }
 
+    //Test Case for Search Sweet by PriceRange.
+    @Test
+    public void testSearchSweetByPriceRange() {
+        SweetShop shop = new SweetShop();
+        shop.addSweet(new Sweet(1001, "Kaju Katli", "Nut-Based", 50, 20));
+        shop.addSweet(new Sweet(1002, "Gajar Halwa", "Vegetable-Based", 30, 15));
+        shop.addSweet(new Sweet(1003, "Gulab Jamun", "Milk-Based", 10, 50));
+        assertEquals(2, shop.searchSweetsByPriceRange(10, 30).size());
+        assertEquals("Gajar Halwa", shop.searchSweetsByPriceRange(10, 30).get(0).getName());
+        assertEquals("Gulab Jamun", shop.searchSweetsByPriceRange(10, 30).get(1).getName());
+        assertEquals(0, shop.searchSweetsByPriceRange(100, 200).size());
+    }
+
 }
