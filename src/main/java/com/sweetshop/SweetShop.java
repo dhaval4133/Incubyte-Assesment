@@ -29,6 +29,13 @@ public class SweetShop {
     public List<Sweet> getAllSweets() {
         return new ArrayList<>(sweets);
     }
+    /**
+     * Deletes a sweet by its unique ID.
+     * @param id the sweet's ID
+     */
+    public void deleteSweet(int id) {
+        sweets.removeIf(sweet -> sweet.getId() == id);
+    }
 
 
 }
