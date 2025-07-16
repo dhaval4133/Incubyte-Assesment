@@ -103,5 +103,16 @@ public class SweetShop {
         return sorted;
     }
 
+    /**
+     * Returns a list of sweets sorted by price.
+     * @return sorted list
+     */
+    public List<Sweet> sortSweetsByPrice() {
+        List<Sweet> sorted = new ArrayList<>(sweets);
+        sorted.sort(Comparator.comparingDouble(Sweet::getPrice));
+        return sorted;
+    }
+
+
 
 }

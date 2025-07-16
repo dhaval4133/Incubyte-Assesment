@@ -106,5 +106,19 @@ public class SweetShopTest {
         assertEquals("Gulab Jamun", sorted.get(2).getName());
     }
 
+    //Test Case for Search Sweet by Price.
+    @Test
+    public void testSortSweetsByPrice() {
+        SweetShop shop = new SweetShop();
+        shop.addSweet(new Sweet(1002, "Gajar Halwa", "Vegetable-Based", 30, 15));
+        shop.addSweet(new Sweet(1001, "Kaju Katli", "Nut-Based", 50, 20));
+        shop.addSweet(new Sweet(1003, "Gulab Jamun", "Milk-Based", 10, 50));
+        List<Sweet> sorted = shop.sortSweetsByPrice();
+        assertEquals("Gulab Jamun", sorted.get(0).getName());
+        assertEquals("Gajar Halwa", sorted.get(1).getName());
+        assertEquals("Kaju Katli", sorted.get(2).getName());
+    }
+
+
 
 }
