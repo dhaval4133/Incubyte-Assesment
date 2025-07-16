@@ -51,5 +51,20 @@ public class SweetShop {
         return result;
     }
 
+    /**
+     * Searches for sweets by category (case-insensitive).
+     * @param category the category to search
+     * @return list of matching sweets
+     */
+    public List<Sweet> searchSweetsByCategory(String category) {
+        List<Sweet> result = new ArrayList<>();
+        for (Sweet sweet : sweets) {
+            if (sweet.getCategory().equalsIgnoreCase(category)) {
+                result.add(sweet);
+            }
+        }
+        return result;
+    }
+
 
 }

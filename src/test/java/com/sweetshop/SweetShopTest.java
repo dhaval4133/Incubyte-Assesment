@@ -55,4 +55,16 @@ public class SweetShopTest {
         assertEquals(0, shop.searchSweetsByName("Rasgulla").size());
     }
 
+    //Test Case for Search Sweet by Category.
+    @Test
+    public void testSearchSweetByCategory() {
+        SweetShop shop = new SweetShop();
+        shop.addSweet(new Sweet(1001, "Kaju Katli", "Nut-Based", 50, 20));
+        shop.addSweet(new Sweet(1002, "Gajar Halwa", "Vegetable-Based", 30, 15));
+        shop.addSweet(new Sweet(1003, "Gulab Jamun", "Milk-Based", 10, 50));
+        assertEquals(1, shop.searchSweetsByCategory("Nut-Based").size());
+        assertEquals("Kaju Katli", shop.searchSweetsByCategory("Nut-Based").get(0).getName());
+        assertEquals(0, shop.searchSweetsByCategory("Fruit-Based").size());
+    }
+
 }
