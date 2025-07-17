@@ -1,0 +1,95 @@
+<!--
+    Sweet Shop - Sweets List Page
+    - Lists all sweets in a table
+    - Provides search, sort, add, delete, purchase, and restock features
+    - Uses Bootstrap for styling
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sweet Shop - Sweets List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Sweet Shop - Sweets List</h1>
+    <!-- Button to add a new sweet -->
+    <a class="btn btn-primary mb-3" href="/add">Add New Sweet</a>
+    <!-- Search and Sort Controls -->
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <!-- Search form: by name, category, price range -->
+            <form class="row g-2" method="get" action="/search">
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="name" placeholder="Search by name">
+                </div>
+                <div class="col-auto">
+                    <input type="text" class="form-control" name="category" placeholder="Search by category">
+                </div>
+                <div class="col-auto">
+                    <input type="number" step="0.01" class="form-control" name="minPrice" placeholder="Min price">
+                </div>
+                <div class="col-auto">
+                    <input type="number" step="0.01" class="form-control" name="maxPrice" placeholder="Max price">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-info">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 text-end">
+            <!-- Sort dropdown -->
+            <form method="get" action="/sort" class="d-inline">
+                <select name="by" class="form-select d-inline w-auto">
+                    <option value="name">Sort by Name</option>
+                    <option value="price">Sort by Price</option>
+                    <option value="quantity">Sort by Quantity</option>
+                </select>
+                <button type="submit" class="btn btn-secondary">Sort</button>
+            </form>
+        </div>
+    </div>
+    <!-- Error message display -->
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <!-- Sweets Table -->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through sweets and display each row -->
+        <tr th:each="sweet : ${sweets}">
+            <td th:text="${sweet.id}"></td>
+            <td th:text="${sweet.name}"></td>
+            <td th:text="${sweet.category}"></td>
+            <td th:text="${sweet.price}"></td>
+            <td th:text="${sweet.quantity}"></td>
+            <td>
+                <!-- Delete sweet form -->
+                <form th:action="@{'/delete/' + ${sweet.id}}" method="post" style="display:inline">
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+                <!-- Purchase sweet form -->
+                <form th:action="@{'/purchase/' + ${sweet.id}}" method="post" style="display:inline">
+                    <input type="number" name="quantity" min="1" max="${sweet.quantity}" value="1" style="width:60px" required>
+                    <button class="btn btn-warning btn-sm" type="submit">Purchase</button>
+                </form>
+                <!-- Restock sweet form -->
+                <form th:action="@{'/restock/' + ${sweet.id}}" method="post" style="display:inline">
+                    <input type="number" name="quantity" min="1" value="1" style="width:60px" required>
+                    <button class="btn btn-success btn-sm" type="submit">Restock</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
