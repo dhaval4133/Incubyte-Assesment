@@ -136,6 +136,22 @@ public class SweetShop {
         throw new IllegalArgumentException(ERROR_SWEET_NOT_FOUND);
     }
 
+    /**
+     * Restocks a sweet by increasing its quantity.
+     * @param id sweet ID
+     * @param quantity quantity to add
+     * @throws IllegalArgumentException if sweet not found
+     */
+    public void restockSweet(int id, int quantity) {
+        for (Sweet sweet : sweets) {
+            if (sweet.getId() == id) {
+                sweet.setQuantity(sweet.getQuantity() + quantity);
+                return;
+            }
+        }
+        throw new IllegalArgumentException(ERROR_SWEET_NOT_FOUND);
+    }
+
 
 
 
