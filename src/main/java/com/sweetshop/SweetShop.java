@@ -9,6 +9,10 @@ import java.util.ArrayList;
  * Supports add, delete, search, sort, purchase, and restock operations.
  */
 public class SweetShop {
+
+    private static final String ERROR_NOT_ENOUGH_STOCK = "Not enough stock available";
+    private static final String ERROR_SWEET_NOT_FOUND = "Sweet not found";
+
     /**
      * Constructs a new SweetShop with an empty inventory.
      */
@@ -112,6 +116,26 @@ public class SweetShop {
         sorted.sort(Comparator.comparingDouble(Sweet::getPrice));
         return sorted;
     }
+
+    /**
+     * Purchases a quantity of a sweet, reducing its stock.
+     * @param id sweet ID
+     * @param quantity quantity to purchase
+     * @throws IllegalArgumentException if not enough stock or sweet not found
+     */
+    public void purchaseSweet(int id, int quantity) {
+        for (Sweet sweet : sweets) {
+            if (sweet.getId() == id) {
+                if (sweet.getQuantity() < quantity) {
+                    throw new IllegalArgumentException(ERROR_NOT_ENOUGH_STOCK);
+                }
+                sweet.setQuantity(sweet.getQuantity() - quantity);
+                return;
+            }
+        }
+        throw new IllegalArgumentException(ERROR_SWEET_NOT_FOUND);
+    }
+
 
 
 
