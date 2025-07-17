@@ -50,5 +50,43 @@ public class SweetShopController {
         return "redirect:/";
     }
 
+    @GetMapping("/search")
+    public String searchSweets(@RequestParam(required = false) String name,
+                               @RequestParam(required = false) String category,
+                               @RequestParam(required = false) Double minPrice,
+                               @RequestParam(required = false) Double maxPrice,
+                               Model model) {
+        List<Sweet> results = sweetShop.getAllSweets();
+        if (name != null && !name.isEmpty()) {
+            results = sweetShop.searchSweetsByName(name);
+        } else if (category != null && !category.isEmpty()) {
+            results = sweetShop.searchSweetsByCategory(category);
+        } else if (minPrice != null && maxPrice != null) {
+            results = sweetShop.searchSweetsByPriceRange(minPrice, maxPrice);
+        }
+        model.addAttribute("sweets", results);
+        return "sweets";
+    }
+
+    @GetMapping("/sort")
+    public String sortSweets(@RequestParam String by, Model model) {
+        List<Sweet> sorted;
+        switch (by) {
+            case "name":
+                sorted = sweetShop.sortSweetsByName();
+                break;
+            case "price":
+                sorted = sweetShop.sortSweetsByPrice();
+                break;
+            case "quantity":
+                sorted = sweetShop.sortSweetsByQuantity();
+                break;
+            default:
+                sorted = sweetShop.getAllSweets();
+        }
+        model.addAttribute("sweets", sorted);
+        return "sweets";
+    }
+
 
 }
